@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   d2ai:
-    image: paper2code:d2ai:latest-alpine
+    image: paper2code:d2ai-server:latest-alpine
     build:
       context: .
       dockerfile: Dockerfile
@@ -16,8 +16,20 @@ services:
     depends_on:
     - redis
     - rasa  
+    - gui
     ports:
     - 5013:5013
+
+  gui:
+    image: paper2code:d2ai-gui:latest-alpine
+    build:
+      context: ./gui
+      dockerfile: Dockerfile
+    ports:
+    - 3000:3000
+    networks:
+    - internal
+    - web
 
   rasa:
     image: rasa/rasa:latest
