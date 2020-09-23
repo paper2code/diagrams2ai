@@ -1,18 +1,42 @@
-version: '3.0'
+---
+version: '3.8'
 services:
+
+  d2ai:
+    image: paper2code:d2ai:latest-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+    - internal
+    - web    
+    # volumes:
+
   rasa:
-    image: rasa/rasa
+    image: rasa/rasa:latest
     ports:
-      - 5005:5005
+    - 5005:5005
     volumes:
-      - ./:/app
+    - ${PWD}:/app
+    networks:
+    - internal
+    - web
     command:
-      - run 
-    extra_hosts:
-       - "myhost:172.17.0.1"
+    - run 
+    #extra_hosts:
+    #- "myhost:172.17.0.1"
+
   redis:
-    image: redis
+    image: redis:6-alpine
     ports:
-      - 6379:6379
+    - 6379:6379
+    networks:
+    - internal
     command:
-      - redis-server --appendonly yes
+    - redis-server --appendonly yes
+
+networks:
+  internal:
+    driver: bridge
+  web:
+    external: true  
