@@ -2,3 +2,11 @@
 *.md
 Dockerfile*
 docker-compose.*
+node_modules
+node_modules/
+node_modules/*
+node_modules/**
+.git
+.git/
+.git/*
+.git/**

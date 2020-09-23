@@ -4,6 +4,7 @@ services:
 
   d2ai:
     image: paper2code/d2ai-server:latest-alpine
+    comtainer_name: ${NAMESPACE}-server
     build:
       context: .
       dockerfile: Dockerfile
@@ -22,6 +23,7 @@ services:
 
   gui:
     image: paper2code/d2ai-gui:latest-alpine
+    comtainer_name: ${NAMESPACE}-gui
     build:
       context: ./gui
       dockerfile: Dockerfile
@@ -35,6 +37,7 @@ services:
 
   rasa:
     image: rasa/rasa:latest
+    comtainer_name: ${NAMESPACE}-rasa
     ports:
     - 5005:5005
     volumes:
@@ -49,6 +52,7 @@ services:
 
   redis:
     image: redis:6-alpine
+    comtainer_name: ${NAMESPACE}-redis
     ports:
     - 6379:6379
     networks:

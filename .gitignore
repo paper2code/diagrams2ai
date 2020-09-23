@@ -6,3 +6,4 @@ save
 ./save/**
 ./rasa/**
 *.sublime*
+.env
