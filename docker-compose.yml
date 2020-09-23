@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   d2ai:
-    image: paper2code:d2ai-server:latest-alpine
+    image: paper2code/d2ai-server:latest-alpine
     build:
       context: .
       dockerfile: Dockerfile
@@ -21,10 +21,12 @@ services:
     - 5013:5013
 
   gui:
-    image: paper2code:d2ai-gui:latest-alpine
+    image: paper2code/d2ai-gui:latest-alpine
     build:
       context: ./gui
       dockerfile: Dockerfile
+    volumes:
+    - ./dist:/opt/service/build
     ports:
     - 3000:3000
     networks:

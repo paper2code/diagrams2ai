@@ -3,14 +3,13 @@ MAINTAINER Michalski Luc <michalski.luc@gmail.com>
 
 WORKDIR /opt/service
 COPY package.json .
+COPY yarn.lock .
 
 RUN yarn install
 COPY . . 
 
-RUN yarn build
-
-VOLUME /opt/service/dist
+VOLUME /opt/service/build
 
 EXPOSE 3000
 
-CMD ["yarn, "start"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
